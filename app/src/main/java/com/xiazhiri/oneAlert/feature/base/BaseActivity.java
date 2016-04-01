@@ -1,4 +1,4 @@
-package com.xiazhiri.oneAlert.feature;
+package com.xiazhiri.oneAlert.feature.base;
 
 import android.support.v7.app.AppCompatActivity;
 

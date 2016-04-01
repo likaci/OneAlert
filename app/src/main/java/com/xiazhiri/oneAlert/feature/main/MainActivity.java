@@ -1,18 +1,11 @@
 package com.xiazhiri.oneAlert.feature.main;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.xiazhiri.oneAlert.R;
-import com.xiazhiri.oneAlert.feature.BaseActivity;
+import com.xiazhiri.oneAlert.feature.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,10 +15,6 @@ public class MainActivity extends BaseActivity implements AHBottomNavigation.OnT
 
     @Bind(R.id.bottomNavigation)
     AHBottomNavigation bottomNavigation;
-    @Bind(R.id.fragmentContainer)
-    FrameLayout fragmentContainer;
-    @Bind(R.id.recyclerView)
-    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,39 +28,16 @@ public class MainActivity extends BaseActivity implements AHBottomNavigation.OnT
 
         bottomNavigation.setOnTabSelectedListener(this);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RecyclerView.Adapter<MyViewHolder>() {
 
-            @Override
-            public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                TextView tv = new TextView(MainActivity.this);
-                tv.setText("hello");
-                return new MyViewHolder(tv);
-            }
-
-            @Override
-            public void onBindViewHolder(MyViewHolder holder, int position) {
-            }
-
-            @Override
-            public int getItemCount() {
-                return 200;
-            }
-        });
-
-    }
-
-    class MyViewHolder extends RecyclerView.ViewHolder {
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-        }
     }
 
     @Override
     public void onTabSelected(int position, boolean wasSelected) {
-
+        AlarmListFragment fragment = AlarmListFragment.newInstance(null, null);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .commit();
     }
-
 
 }

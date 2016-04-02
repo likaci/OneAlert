@@ -4,14 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="98dp"
+    android:layout_margin="4dp"
     app:cardCornerRadius="3dp"
     app:elevation="1dp"
-    android:layout_margin="4dp"
     >
 
     <RelativeLayout
+        android:id="@+id/item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackground"
         >
 
         <View
@@ -29,28 +31,28 @@
             android:layout_marginTop="8dp"
             android:layout_toRightOf="@id/alarmLevelTint"
             android:text="Server1"
-            android:textSize="16sp"
             android:textColor="#000"
+            android:textSize="16sp"
             />
 
         <TextView
+            android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/serverName"
             android:layout_alignParentRight="true"
             android:layout_marginRight="8dp"
             android:text="2016-04-02"
-            android:id="@+id/time"
             />
 
         <TextView
+            android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/serverName"
             android:layout_below="@id/serverName"
             android:layout_marginTop="8dp"
             android:text="CPU占用98%,连续70分钟"
-            android:id="@+id/message"
             />
 
     </RelativeLayout>

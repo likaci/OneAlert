@@ -1,5 +1,8 @@
 package com.xiazhiri.oneAlert.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
@@ -104,7 +107,7 @@ public class Alarm {
         this.data = data;
     }
 
-    public static class DataEntity {
+    public static class DataEntity implements Parcelable{
         private int alarmId;
         private String alarmType;
         private String alarmName;
@@ -165,6 +168,52 @@ public class Alarm {
         private Object parentAlarmId;
         private List<String> assignments;
         private List<String> contactNames;
+
+        protected DataEntity(Parcel in) {
+            alarmId = in.readInt();
+            alarmType = in.readString();
+            alarmName = in.readString();
+            entityName = in.readString();
+            status = in.readString();
+            priority = in.readInt();
+            alarmContent = in.readString();
+            count = in.readInt();
+            creationTime = in.readString();
+            creationTimeL = in.readLong();
+            modifiedTime = in.readString();
+            modifiedTimeL = in.readLong();
+            lastTimeTxt = in.readString();
+            timeDuring = in.readString();
+            entityId = in.readString();
+            app = in.readString();
+            appService = in.readParcelable(AppServiceEntity.class.getClassLoader());
+            ackTime = in.readString();
+            ackTimeL = in.readLong();
+            ackUser = in.readString();
+            ackUserContactName = in.readString();
+            user = in.readString();
+            ext = in.readInt();
+            activeCount = in.readInt();
+            host = in.readString();
+            service = in.readString();
+            tag = in.readString();
+            metric = in.readString();
+            version = in.readInt();
+            assignments = in.createStringArrayList();
+            contactNames = in.createStringArrayList();
+        }
+
+        public static final Creator<DataEntity> CREATOR = new Creator<DataEntity>() {
+            @Override
+            public DataEntity createFromParcel(Parcel in) {
+                return new DataEntity(in);
+            }
+
+            @Override
+            public DataEntity[] newArray(int size) {
+                return new DataEntity[size];
+            }
+        };
 
         public int getAlarmId() {
             return alarmId;
@@ -486,7 +535,47 @@ public class Alarm {
             this.contactNames = contactNames;
         }
 
-        public static class AppServiceEntity {
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(alarmId);
+            dest.writeString(alarmType);
+            dest.writeString(alarmName);
+            dest.writeString(entityName);
+            dest.writeString(status);
+            dest.writeInt(priority);
+            dest.writeString(alarmContent);
+            dest.writeInt(count);
+            dest.writeString(creationTime);
+            dest.writeLong(creationTimeL);
+            dest.writeString(modifiedTime);
+            dest.writeLong(modifiedTimeL);
+            dest.writeString(lastTimeTxt);
+            dest.writeString(timeDuring);
+            dest.writeString(entityId);
+            dest.writeString(app);
+            dest.writeParcelable(appService, flags);
+            dest.writeString(ackTime);
+            dest.writeLong(ackTimeL);
+            dest.writeString(ackUser);
+            dest.writeString(ackUserContactName);
+            dest.writeString(user);
+            dest.writeInt(ext);
+            dest.writeInt(activeCount);
+            dest.writeString(host);
+            dest.writeString(service);
+            dest.writeString(tag);
+            dest.writeString(metric);
+            dest.writeInt(version);
+            dest.writeStringList(assignments);
+            dest.writeStringList(contactNames);
+        }
+
+        public static class AppServiceEntity implements Parcelable{
             private String id;
             private String escalationId;
             private String entityId;
@@ -504,6 +593,52 @@ public class Alarm {
             private Object mnsAccesskeyId;
             private Object mnsAccesskeySecret;
             private Object mnsAccountEndpoint;
+
+            protected AppServiceEntity(Parcel in) {
+                id = in.readString();
+                escalationId = in.readString();
+                entityId = in.readString();
+                description = in.readString();
+                integrateType = in.readString();
+                autoResolve = in.readInt();
+                ackTimeout = in.readInt();
+                user = in.readString();
+                escalation = in.readString();
+                password = in.readString();
+                compress = in.readInt();
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(id);
+                dest.writeString(escalationId);
+                dest.writeString(entityId);
+                dest.writeString(description);
+                dest.writeString(integrateType);
+                dest.writeInt(autoResolve);
+                dest.writeInt(ackTimeout);
+                dest.writeString(user);
+                dest.writeString(escalation);
+                dest.writeString(password);
+                dest.writeInt(compress);
+            }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            public static final Creator<AppServiceEntity> CREATOR = new Creator<AppServiceEntity>() {
+                @Override
+                public AppServiceEntity createFromParcel(Parcel in) {
+                    return new AppServiceEntity(in);
+                }
+
+                @Override
+                public AppServiceEntity[] newArray(int size) {
+                    return new AppServiceEntity[size];
+                }
+            };
 
             public String getId() {
                 return id;

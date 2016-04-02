@@ -1,11 +1,13 @@
 package com.xiazhiri.oneAlert.feature.alarm;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.xiazhiri.oneAlert.R;
@@ -20,8 +22,10 @@ import butterknife.ButterKnife;
 public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.ViewHolder> {
     LayoutInflater inflater;
     Alarm alarm;
+    Context context;
 
     public AlarmListAdapter(Context context, Alarm alarm) {
+        this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.alarm = alarm;
     }
@@ -62,7 +66,7 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
         return (alarm == null || alarm.getData() == null) ? 0 : alarm.getData().size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @Bind(R.id.alarmLevelTint)
         View alarmLevelTint;
@@ -72,10 +76,21 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
         TextView time;
         @Bind(R.id.message)
         TextView message;
+        @Bind(R.id.item)
+        RelativeLayout item;
 
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            item.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Alarm.DataEntity data = alarm.getData().get(getAdapterPosition());
+            Intent intent = new Intent(AlarmListAdapter.this.context, AlarmDetailActivity.class);
+            intent.putExtra("data",data);
+            AlarmListAdapter.this.context.startActivity(intent);
         }
     }
 

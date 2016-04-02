@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.xiazhiri.oneAlert.feature.alarm.AlarmDetailActivity"
+    >
+
+    <android.support.v7.widget.CardView
+        style="@style/card_view">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            >
+
+            <TextView
+                android:id="@+id/server"
+                style="@style/text_detail"
+                android:text="Server"
+                />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        style="@style/card_view">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            >
+
+            <TextView
+                android:id="@+id/name"
+                style="@style/text_detail"
+                android:text="Name"
+                />
+
+            <TextView
+                android:id="@+id/id"
+                style="@style/text_detail"
+                android:layout_alignBottom="@id/name"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/name"
+                android:text="id"
+                />
+
+            <TextView
+                android:id="@+id/content"
+                style="@style/text_detail"
+                android:layout_below="@id/name"
+                android:text="内容"
+                />
+
+            <TextView
+                android:id="@+id/startTime"
+                style="@style/text_detail"
+                android:layout_below="@id/content"
+                android:text="开始时间"
+                />
+
+            <TextView
+                android:id="@+id/endTime"
+                style="@style/text_detail"
+                android:layout_below="@id/startTime"
+                android:text="结束时间"
+                />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        style="@style/card_view">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            >
+
+            <TextView
+                android:id="@+id/comment"
+                style="@style/text_detail"
+                android:text="备注"
+                />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.db.chart.model.BarSet;
 import com.db.chart.model.LineSet;
@@ -13,6 +15,8 @@ import com.db.chart.view.BarChartView;
 import com.db.chart.view.LineChartView;
 import com.xiazhiri.oneAlert.R;
 import com.xiazhiri.oneAlert.feature.base.BaseFragment;
+import com.xiazhiri.oneAlert.model.AlertCompress;
+import com.xiazhiri.oneAlert.model.AlertTop;
 import com.xiazhiri.oneAlert.model.ChartData;
 import com.xiazhiri.oneAlert.network.OneAlertService;
 
@@ -29,6 +33,10 @@ public class DashboardFragment extends BaseFragment {
     LineChartView lineChartView;
     @Bind(R.id.barChartView)
     BarChartView barChartView;
+    @Bind(R.id.alertOverviewHolder)
+    LinearLayout alertOverviewHolder;
+    @Bind(R.id.alertCompressChart)
+    LineChartView alertCompressChart;
     private String mParam1;
     private String mParam2;
 
@@ -77,6 +85,82 @@ public class DashboardFragment extends BaseFragment {
                         throwable.printStackTrace();
                     }
                 });
+
+        OneAlertService.getAlertContentTop()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<AlertTop>() {
+                    @Override
+                    public void call(AlertTop alertTop) {
+                        initView(alertTop);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
+                });
+
+
+        OneAlertService.getAlertCompress()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<AlertCompress>() {
+                    @Override
+                    public void call(AlertCompress alertCompress) {
+                        initView(alertCompress);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
+                });
+
+
+    }
+
+    private void initView(AlertCompress alertCompress) {
+        if (alertCompress != null && alertCompress.getData() != null && alertCompress.getData().getDate() != null && alertCompress.getData().getDate().size() > 0) {
+            AlertCompress.DataEntity data = alertCompress.getData();
+            LineSet alertSet = new LineSet();
+            LineSet eventSet = new LineSet();
+            for (int i = 0; i < data.getDate().size(); i++) {
+                String date = data.getDate().get(i);
+                Long alert = data.getAlert().get(i);
+                Long event = data.getEvent().get(i);
+                alertSet.addPoint(date, alert);
+                eventSet.addPoint(date, event);
+            }
+
+
+            alertSet.setColor(Color.parseColor("#4CAF50"))
+                    .setThickness(10)
+                    .setDotsColor(Color.parseColor("#388E3C"))
+                    .setFill(Color.parseColor("#85388E3C"));
+
+            eventSet.setColor(Color.parseColor("#2196F3"))
+                    .setThickness(10)
+                    .setDotsColor(Color.parseColor("#1976D2"))
+                    .setFill(Color.parseColor("#851976D2"));
+
+            alertCompressChart.addData(alertSet);
+            alertCompressChart.addData(eventSet);
+
+            alertCompressChart.setStep(5);
+
+            alertCompressChart.show();
+        }
+    }
+
+    private void initView(AlertTop alertTop) {
+        if (alertTop != null && alertTop.getData() != null && alertTop.getData().size() > 0) {
+            for (AlertTop.DataEntity data : alertTop.getData()) {
+                TextView textView = new TextView(getActivity());
+                textView.setText(data.getContent() + " " + data.getCount());
+                alertOverviewHolder.addView(textView);
+            }
+        }
     }
 
     private void initView(ChartData chartData) {

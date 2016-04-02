@@ -1,26 +1,92 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.xiazhiri.oneAlert.feature.dashboard.DashboardFragment"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.xiazhiri.oneAlert.feature.dashboard.DashboardFragment"
     >
 
-    <com.db.chart.view.BarChartView
-        android:id="@+id/barChartView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         >
 
-    </com.db.chart.view.BarChartView>
 
-    <com.db.chart.view.LineChartView
-        android:id="@+id/lineChartView"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:paddingLeft="45dp"
-        android:paddingRight="45dp"
-        android:paddingBottom="4dp"
-        >
-    </com.db.chart.view.LineChartView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_margin="8dp"
+            >
 
-</FrameLayout>
+            <TextView
+                android:id="@+id/overview"
+                style="@style/textTitle"
+                android:layout_marginBottom="8dp"
+                android:text="总览"
+                />
+
+            <com.db.chart.view.BarChartView
+                android:id="@+id/barChartView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/overview"
+                />
+
+            <com.db.chart.view.LineChartView
+                android:id="@+id/lineChartView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignTop="@id/barChartView"
+                android:paddingBottom="4dp"
+                android:paddingLeft="45dp"
+                android:paddingRight="45dp"
+                tools:background="@color/colorPrimaryDark"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/alertOverviewHolder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/alertOverview"
+                style="@style/textTitle"
+                android:layout_marginBottom="8dp"
+                android:text="告警内容"
+                />
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_margin="8dp"
+            >
+
+            <TextView
+                android:id="@+id/alertCompress"
+                style="@style/textTitle"
+                android:layout_marginBottom="8dp"
+                android:text="告警压缩"
+                />
+
+            <com.db.chart.view.LineChartView
+                android:id="@+id/alertCompressChart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/alertCompress"
+                tools:background="#0123D2"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

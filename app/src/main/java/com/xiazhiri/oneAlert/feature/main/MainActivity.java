@@ -24,12 +24,11 @@ public class MainActivity extends BaseActivity implements AHBottomNavigation.OnT
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        bottomNavigation.addItem(new AHBottomNavigationItem("Alert", R.mipmap.ic_launcher));
-        bottomNavigation.addItem(new AHBottomNavigationItem("Team", R.mipmap.ic_launcher));
-        bottomNavigation.addItem(new AHBottomNavigationItem("Dashboard", R.mipmap.ic_launcher));
+        bottomNavigation.addItem(new AHBottomNavigationItem("Alarm", R.drawable.ic_notification));
+        bottomNavigation.addItem(new AHBottomNavigationItem("Dashboard", R.drawable.ic_dashboard));
+        bottomNavigation.addItem(new AHBottomNavigationItem("Team", R.drawable.ic_team));
 
         bottomNavigation.setOnTabSelectedListener(this);
-
 
     }
 

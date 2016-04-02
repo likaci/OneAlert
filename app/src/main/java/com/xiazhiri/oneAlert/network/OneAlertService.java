@@ -25,7 +25,7 @@ public class OneAlertService {
     }
 
     public interface OneAlertServiceApi {
-        @GET("alert/api/alert/assigned?status=ACK&page=1&rows=20&time=week&UPYOO_TOKEN=8cde4c8d-0ef8-41bc-87cd-aa0744306275")
+        @GET("http://c.110monitor.com/alert/api/alert?UPYOO_TOKEN=8cde4c8d-0ef8-41bc-87cd-aa0744306275")
         Observable<Alarm> getAlarm();
 
         //http://c.110monitor.com/console//CrossDomainProxy?1=1&_workId=1459526259772-49412&UPYOO_TOKEN=98ba632b-7c6a-4894-96cc-19bf8db1721a&_url=http://c.110monitor.com/analyse/api/alertAnalyse?startTime=1459267059768&endTime=1459526259768&_=1459526206604

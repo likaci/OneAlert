@@ -1,6 +1,7 @@
 package com.xiazhiri.oneAlert.feature.main;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -77,24 +78,46 @@ public class AlarmListFragment extends BaseFragment {
 
     private void initView(final Alarm alarm) {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new RecyclerView.Adapter<MyViewHolder>() {
+        recyclerView.setAdapter(new RecyclerView.Adapter<ViewHolder>() {
             @Override
-            public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(getActivity()).inflate(android.R.layout.simple_list_item_1, parent, false);
-                return new MyViewHolder(view);
+            public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_alarm_detail, parent, false);
+                return new ViewHolder(view);
             }
 
             @Override
-            public void onBindViewHolder(MyViewHolder holder, int position) {
-                holder.textView.setText(alarm.getData().get(0).getAlarmContent());
+            public void onBindViewHolder(ViewHolder holder, int position) {
+                Alarm.DataEntity data = alarm.getData().get(position);
+                holder.serverName.setText(data.getAppService().getDescription());
+                holder.message.setText(data.getAlarmName());
+                holder.time.setText(data.getCreationTime());
+
+                int tintColor;
+                switch (data.getPriority()) {
+                    case 3:
+                        tintColor = Color.parseColor("#FF3837");
+                        break;
+                    case 2:
+                        tintColor = Color.parseColor("#EF773E");
+                        break;
+                    case 1:
+                        tintColor = Color.parseColor("#48A6F1");
+                        break;
+                    default:
+                        tintColor  = Color.parseColor("#48A6F1");
+                        break;
+                }
+                holder.alarmLevelTint.setBackgroundColor(tintColor);
             }
 
             @Override
             public int getItemCount() {
-                return 200;
+                return alarm.getData().size();
             }
         });
+
     }
+
 
     @Override
     public void onDestroyView() {
@@ -102,12 +125,21 @@ public class AlarmListFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            textView = (TextView) itemView.findViewById(android.R.id.text1);
+        @Bind(R.id.alarmLevelTint)
+        View alarmLevelTint;
+        @Bind(R.id.serverName)
+        TextView serverName;
+        @Bind(R.id.time)
+        TextView time;
+        @Bind(R.id.message)
+        TextView message;
+
+        ViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
         }
     }
+
 }

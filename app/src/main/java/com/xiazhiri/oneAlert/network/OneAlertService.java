@@ -29,7 +29,7 @@ public class OneAlertService {
         Observable<Alarm> getAlarm();
 
         //http://c.110monitor.com/console//CrossDomainProxy?1=1&_workId=1459526259772-49412&UPYOO_TOKEN=98ba632b-7c6a-4894-96cc-19bf8db1721a&_url=http://c.110monitor.com/analyse/api/alertAnalyse?startTime=1459267059768&endTime=1459526259768&_=1459526206604
-        @GET("http://c.110monitor.com/console//CrossDomainProxy?1=1&_workId=1459526259772-49412&UPYOO_TOKEN=98ba632b-7c6a-4894-96cc-19bf8db1721a&_url=http://c.110monitor.com/analyse/api/alertAnalyse?startTime=1459267059768&endTime=1459526259768&_=1459526206604")
+        @GET("http://c.110monitor.com/console//CrossDomainProxy?1=1&_workId=1459566479531-64875&UPYOO_TOKEN=98ba632b-7c6a-4894-96cc-19bf8db1721a&_url=http://c.110monitor.com/analyse/api/alertAnalyse?startTime=1459307279525&endTime=1459566479525&_=1459564554785")
         Observable<ChartData> getChartData();
     }
 

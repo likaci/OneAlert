@@ -5,11 +5,21 @@
              tools:context="com.xiazhiri.oneAlert.feature.dashbaord.DashboardFragment"
     >
 
-    <com.db.chart.view.LineChartView
+    <com.db.chart.view.BarChartView
+        android:id="@+id/barChartView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="400dp"
+        >
+
+    </com.db.chart.view.BarChartView>
+
+    <com.db.chart.view.LineChartView
         android:id="@+id/lineChartView"
-        android:background="#000"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:paddingLeft="45dp"
+        android:paddingRight="45dp"
+        android:paddingBottom="4dp"
         >
     </com.db.chart.view.LineChartView>
 

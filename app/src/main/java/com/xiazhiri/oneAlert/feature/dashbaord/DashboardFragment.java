@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.db.chart.model.BarSet;
 import com.db.chart.model.LineSet;
+import com.db.chart.view.BarChartView;
 import com.db.chart.view.LineChartView;
 import com.xiazhiri.oneAlert.R;
 import com.xiazhiri.oneAlert.feature.base.BaseFragment;
@@ -28,6 +30,8 @@ public class DashboardFragment extends BaseFragment {
             {4.5f, 2.5f, 2.5f, 9f, 4.5f, 9.5f, 5f, 8.3f, 1.8f}};
     @Bind(R.id.lineChartView)
     LineChartView lineChartView;
+    @Bind(R.id.barChartView)
+    BarChartView barChartView;
     private String mParam1;
     private String mParam2;
 
@@ -79,35 +83,40 @@ public class DashboardFragment extends BaseFragment {
     }
 
     private void initView(ChartData chartData) {
-        LineSet lineSetCount = new LineSet();
+        BarSet barSetAlarmCount = new BarSet();
         LineSet lineSetMttr = new LineSet();
         LineSet lineSetMtta = new LineSet();
 
-        //LineSet dataset = new LineSet(mLabels, mValues[0]);
-        //dataset.setColor(Color.parseColor("#758cbb"))
-        //        .setFill(Color.parseColor("#2d374c"))
-        //        .setDotsColor(Color.parseColor("#758cbb"))
-        //        .setThickness(4)
-        //        .setDashed(new float[]{10f,10f})
-        //        .beginAt(5);
-        //lineChartView.addData(dataset);
-        //
-        //lineChartView.setBorderSpacing(15)
-        //        .setAxisBorderValues(0, 20)
-        //        .setYLabels(AxisController.LabelPosition.NONE)
-        //        .setLabelsColor(Color.parseColor("#6a84c3"))
-        //        .setXAxis(false)
-        //        .setYAxis(false);
-
-
         for (int i = 0; i < chartData.getData().getDate().size(); i++) {
             String date = chartData.getData().getDate().get(i);
-            String count = chartData.getData().getCount().get(i);
-            lineSetCount.addPoint(date, Float.parseFloat(count));
-            lineSetCount.setFill(Color.RED);
-        }
-        lineChartView.addData(lineSetCount);
 
+            String count = chartData.getData().getCount().get(i);
+            String mtta = chartData.getData().getMtta().get(i);
+            String mttr = chartData.getData().getMttr().get(i);
+
+            barSetAlarmCount.addBar(date, Float.parseFloat(count));
+            lineSetMtta.addPoint(date, Float.parseFloat(mtta));
+            lineSetMttr.addPoint(date, Float.parseFloat(mttr));
+        }
+
+        lineSetMtta.setColor(Color.parseColor("#32CD32"))
+                .setDotsColor(Color.parseColor("#32CD32"))
+                .setDotsRadius(12);
+
+        lineSetMttr.setColor(Color.parseColor("#6495ED"))
+                .setDotsColor(Color.parseColor("#6495ED"))
+                .setDotsRadius(12);
+
+        barSetAlarmCount.setColor(Color.parseColor("#C687CEFA"));
+
+        barChartView.addData(barSetAlarmCount);
+
+        lineChartView.setLabelsColor(Color.TRANSPARENT).setYAxis(false).setXAxis(false);
+
+        lineChartView.addData(lineSetMtta);
+        lineChartView.addData(lineSetMttr);
+
+        barChartView.show();
         lineChartView.show();
     }
 

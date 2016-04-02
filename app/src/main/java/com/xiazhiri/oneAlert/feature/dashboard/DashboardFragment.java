@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.db.chart.model.BarSet;
 import com.db.chart.model.LineSet;
+import com.db.chart.view.AxisController;
 import com.db.chart.view.BarChartView;
 import com.db.chart.view.LineChartView;
 import com.xiazhiri.oneAlert.R;
@@ -192,7 +193,18 @@ public class DashboardFragment extends BaseFragment {
 
         barChartView.addData(barSetAlarmCount);
 
-        lineChartView.setLabelsColor(Color.TRANSPARENT).setYAxis(false).setXAxis(false);
+        //barChartView
+        //        .setYAxis(false)
+        //        .setXAxis(false)
+        //        .setYLabels(AxisController.LabelPosition.NONE)
+        //        .setXLabels(AxisController.LabelPosition.NONE);
+        barChartView.setBarSpacing(900);
+
+        lineChartView
+                .setYAxis(false)
+                .setXAxis(false)
+                .setYLabels(AxisController.LabelPosition.NONE)
+                .setXLabels(AxisController.LabelPosition.NONE);
 
         lineChartView.addData(lineSetMtta);
         lineChartView.addData(lineSetMttr);

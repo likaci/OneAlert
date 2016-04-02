@@ -2,6 +2,8 @@ package com.xiazhiri.oneAlert.feature.main;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
@@ -43,6 +45,17 @@ public class MainActivity extends BaseActivity implements AHBottomNavigation.OnT
                 .beginTransaction()
                 .replace(R.id.fragmentContainer, fragment)
                 .commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0, 1, 0, "设置");
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return true;
     }
 
 }

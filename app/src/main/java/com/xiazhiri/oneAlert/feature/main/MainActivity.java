@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.xiazhiri.oneAlert.R;
+import com.xiazhiri.oneAlert.feature.alarm.AlarmListFragment;
 import com.xiazhiri.oneAlert.feature.base.BaseActivity;
 import com.xiazhiri.oneAlert.feature.dashbaord.DashboardFragment;
 
@@ -35,7 +36,7 @@ public class MainActivity extends BaseActivity implements AHBottomNavigation.OnT
     @Override
     public void onTabSelected(int position, boolean wasSelected) {
         Fragment fragment = AlarmListFragment.newInstance(null, null);
-        if (position == 2) {
+        if (position == 1) {
             fragment = DashboardFragment.newInstance(null, null);
         }
         getSupportFragmentManager()

@@ -10,7 +10,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.xiazhiri.oneAlert.R;
 import com.xiazhiri.oneAlert.feature.alarm.AlarmListFragment;
 import com.xiazhiri.oneAlert.feature.base.BaseActivity;
-import com.xiazhiri.oneAlert.feature.dashbaord.DashboardFragment;
+import com.xiazhiri.oneAlert.feature.dashboard.DashboardFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

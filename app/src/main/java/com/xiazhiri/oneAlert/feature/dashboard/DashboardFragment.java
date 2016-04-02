@@ -1,4 +1,4 @@
-package com.xiazhiri.oneAlert.feature.dashbaord;
+package com.xiazhiri.oneAlert.feature.dashboard;
 
 
 import android.graphics.Color;
@@ -25,9 +25,6 @@ import rx.schedulers.Schedulers;
 public class DashboardFragment extends BaseFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private final String[] mLabels = {"Jan", "Fev", "Mar", "Apr", "Jun", "May", "Jul", "Aug", "Sep"};
-    private final float[][] mValues = {{3.5f, 4.7f, 4.3f, 8f, 6.5f, 9.9f, 7f, 8.3f, 7.0f},
-            {4.5f, 2.5f, 2.5f, 9f, 4.5f, 9.5f, 5f, 8.3f, 1.8f}};
     @Bind(R.id.lineChartView)
     LineChartView lineChartView;
     @Bind(R.id.barChartView)

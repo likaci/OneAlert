@@ -2,7 +2,7 @@ package com.xiazhiri.oneAlert.feature.alarm;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,22 +43,20 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
         holder.message.setText(data.getAlarmName());
         holder.time.setText(data.getCreationTime());
 
-        int tintColor;
+        int tintColorId;
         switch (data.getPriority()) {
             case 3:
-                tintColor = Color.parseColor("#FF3837");
+                tintColorId = R.color.red_500;
                 break;
             case 2:
-                tintColor = Color.parseColor("#EF773E");
-                break;
-            case 1:
-                tintColor = Color.parseColor("#48A6F1");
+                tintColorId = R.color.orange_500;
                 break;
             default:
-                tintColor = Color.parseColor("#48A6F1");
+            case 1:
+                tintColorId = R.color.blue_500;
                 break;
         }
-        holder.alarmLevelTint.setBackgroundColor(tintColor);
+        holder.alarmLevelTint.setBackgroundColor(ContextCompat.getColor(context, tintColorId));
     }
 
     @Override
@@ -89,7 +87,7 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmListAdapter.View
         public void onClick(View v) {
             Alarm.DataEntity data = alarm.getData().get(getAdapterPosition());
             Intent intent = new Intent(AlarmListAdapter.this.context, AlarmDetailActivity.class);
-            intent.putExtra("data",data);
+            intent.putExtra("data", data);
             AlarmListAdapter.this.context.startActivity(intent);
         }
     }

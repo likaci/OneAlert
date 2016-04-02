@@ -1,8 +1,9 @@
 package com.xiazhiri.oneAlert.feature.dashboard;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.ColorUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,23 +136,27 @@ public class DashboardFragment extends BaseFragment {
             }
 
 
-            alertSet.setColor(Color.parseColor("#4CAF50"))
+            alertSet.setColor(getColor(R.color.green_500))
                     .setThickness(10)
-                    .setDotsColor(Color.parseColor("#388E3C"))
-                    .setFill(Color.parseColor("#85388E3C"));
+                    .setDotsColor(getColor(R.color.green_700))
+                    .setFill(ColorUtils.setAlphaComponent(getColor(R.color.green_700), 127));
 
-            eventSet.setColor(Color.parseColor("#2196F3"))
+            eventSet.setColor(getColor(R.color.blue_500))
                     .setThickness(10)
-                    .setDotsColor(Color.parseColor("#1976D2"))
-                    .setFill(Color.parseColor("#851976D2"));
+                    .setDotsColor(getColor(R.color.blue_700))
+                    .setFill(ColorUtils.setAlphaComponent(getColor(R.color.blue_700), 127));
 
-            alertCompressChart.addData(alertSet);
             alertCompressChart.addData(eventSet);
+            alertCompressChart.addData(alertSet);
 
             alertCompressChart.setStep(5);
 
             alertCompressChart.show();
         }
+    }
+
+    private int getColor(int id) {
+        return ContextCompat.getColor(getActivity(), id);
     }
 
     private void initView(AlertTop alertTop) {
@@ -181,24 +186,21 @@ public class DashboardFragment extends BaseFragment {
             lineSetMttr.addPoint(date, Float.parseFloat(mttr));
         }
 
-        lineSetMtta.setColor(Color.parseColor("#32CD32"))
-                .setDotsColor(Color.parseColor("#32CD32"))
-                .setDotsRadius(12);
+        lineSetMtta
+                .setThickness(10)
+                .setColor(getColor(R.color.green_500))
+                .setDotsColor(getColor(R.color.green_700));
 
-        lineSetMttr.setColor(Color.parseColor("#6495ED"))
-                .setDotsColor(Color.parseColor("#6495ED"))
-                .setDotsRadius(12);
+        lineSetMttr
+                .setThickness(10)
+                .setColor(getColor(R.color.blue_500))
+                .setDotsColor(getColor(R.color.blue_700));
 
-        barSetAlarmCount.setColor(Color.parseColor("#C687CEFA"));
+        barSetAlarmCount.setColor(ColorUtils.setAlphaComponent(getColor(R.color.light_blue_200), 125));
 
         barChartView.addData(barSetAlarmCount);
 
-        //barChartView
-        //        .setYAxis(false)
-        //        .setXAxis(false)
-        //        .setYLabels(AxisController.LabelPosition.NONE)
-        //        .setXLabels(AxisController.LabelPosition.NONE);
-        barChartView.setBarSpacing(900);
+        barChartView.setBarSpacing(800);
 
         lineChartView
                 .setYAxis(false)

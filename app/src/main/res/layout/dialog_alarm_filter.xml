@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="16dp"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="处理状态"
+        android:textSize="16sp"
+        />
+
+    <RadioGroup
+        android:id="@+id/process"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:orientation="horizontal"
+        >
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/processAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全部"
+            />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/processNot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未处理"
+            />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/processDoing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="处理中"
+            />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/processDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已解决"
+            />
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="分配状态"
+        android:textSize="16sp"
+        />
+
+    <RadioGroup
+        android:id="@+id/assign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:orientation="horizontal"
+        >
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/assignAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全部"
+            />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/assignMine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的"
+            />
+
+
+    </RadioGroup>
+
+</LinearLayout>

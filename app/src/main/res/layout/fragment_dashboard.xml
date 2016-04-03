@@ -54,10 +54,75 @@
                     android:layout_height="match_parent"
                     android:layout_alignTop="@id/barChartView"
                     android:paddingBottom="28dp"
-                    android:paddingLeft="60dp"
-                    android:paddingRight="60dp"
+                    android:paddingLeft="70dp"
+                    android:paddingRight="70dp"
                     android:paddingTop="28dp"
                     tools:background="@color/colorPrimary"
+                    />
+
+                <View
+                    android:id="@+id/alarmCountTint"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="52dp"
+                    android:background="@color/light_blue_200"
+                    />
+
+                <TextView
+                    android:id="@+id/alarmCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/alarmCountTint"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="-1dp"
+                    android:layout_toRightOf="@id/alarmCountTint"
+                    android:text="告警次数"
+                    android:textSize="10sp"
+                    />
+
+                <View
+                    android:id="@+id/mttrTint"
+                    android:layout_width="10dp"
+                    android:layout_height="2dp"
+                    android:layout_alignLeft="@id/alarmCountTint"
+                    android:layout_below="@id/alarmCountTint"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/blue_500"
+                    />
+
+                <TextView
+                    android:id="@+id/mttr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/mttrTint"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="-6dp"
+                    android:layout_toRightOf="@id/mttrTint"
+                    android:text="MTTR"
+                    android:textSize="10sp"
+                    />
+
+                <View
+                    android:id="@+id/mttaTint"
+                    android:layout_width="10dp"
+                    android:layout_height="2dp"
+                    android:layout_alignLeft="@id/alarmCountTint"
+                    android:layout_below="@id/alarmCountTint"
+                    android:layout_marginTop="23dp"
+                    android:background="@color/green_500"
+                    />
+
+                <TextView
+                    android:id="@+id/mtta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/mttaTint"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="-6dp"
+                    android:layout_toRightOf="@id/mttrTint"
+                    android:text="MTTA"
+                    android:textSize="10sp"
                     />
 
             </RelativeLayout>
@@ -138,7 +203,50 @@
                     android:layout_below="@id/alertCompress"
                     android:padding="8dp"
                     tools:background="@color/colorPrimary"
-                    />
+                    >
+
+                    <View
+                        android:id="@+id/eventTint"
+                        android:layout_width="10dp"
+                        android:layout_height="2dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/blue_500"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/eventTint"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="-5dp"
+                        android:layout_toRightOf="@id/eventTint"
+                        android:text="事件"
+                        android:textSize="10sp"
+                        />
+
+                    <View
+                        android:id="@+id/alertTint"
+                        android:layout_width="10dp"
+                        android:layout_height="2dp"
+                        android:layout_alignLeft="@id/eventTint"
+                        android:layout_below="@id/eventTint"
+                        android:layout_marginTop="14dp"
+                        android:background="@color/green_500"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/alertTint"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="-5dp"
+                        android:layout_toRightOf="@id/alertTint"
+                        android:text="告警"
+                        android:textSize="10sp"
+                        />
+
+                </com.db.chart.view.LineChartView>
 
             </RelativeLayout>
 

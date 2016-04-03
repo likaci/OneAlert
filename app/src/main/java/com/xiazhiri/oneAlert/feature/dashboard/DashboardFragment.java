@@ -15,6 +15,8 @@ import com.db.chart.model.LineSet;
 import com.db.chart.view.AxisController;
 import com.db.chart.view.BarChartView;
 import com.db.chart.view.LineChartView;
+import com.db.chart.view.animation.Animation;
+import com.db.chart.view.animation.easing.LinearEase;
 import com.xiazhiri.oneAlert.R;
 import com.xiazhiri.oneAlert.feature.base.BaseFragment;
 import com.xiazhiri.oneAlert.model.AlertCompress;
@@ -122,53 +124,6 @@ public class DashboardFragment extends BaseFragment {
 
     }
 
-    private void initView(AlertCompress alertCompress) {
-        if (alertCompress != null && alertCompress.getData() != null && alertCompress.getData().getDate() != null && alertCompress.getData().getDate().size() > 0) {
-            AlertCompress.DataEntity data = alertCompress.getData();
-            LineSet alertSet = new LineSet();
-            LineSet eventSet = new LineSet();
-            for (int i = 0; i < data.getDate().size(); i++) {
-                String date = data.getDate().get(i);
-                Long alert = data.getAlert().get(i);
-                Long event = data.getEvent().get(i);
-                alertSet.addPoint(date, alert);
-                eventSet.addPoint(date, event);
-            }
-
-
-            alertSet.setColor(getColor(R.color.green_500))
-                    .setThickness(10)
-                    .setDotsColor(getColor(R.color.green_700))
-                    .setFill(ColorUtils.setAlphaComponent(getColor(R.color.green_700), 127));
-
-            eventSet.setColor(getColor(R.color.blue_500))
-                    .setThickness(10)
-                    .setDotsColor(getColor(R.color.blue_700))
-                    .setFill(ColorUtils.setAlphaComponent(getColor(R.color.blue_700), 127));
-
-            alertCompressChart.addData(eventSet);
-            alertCompressChart.addData(alertSet);
-
-            alertCompressChart.setStep(5);
-
-            alertCompressChart.show();
-        }
-    }
-
-    private int getColor(int id) {
-        return ContextCompat.getColor(getActivity(), id);
-    }
-
-    private void initView(AlertTop alertTop) {
-        if (alertTop != null && alertTop.getData() != null && alertTop.getData().size() > 0) {
-            for (AlertTop.DataEntity data : alertTop.getData()) {
-                TextView textView = new TextView(getActivity());
-                textView.setText(data.getContent() + " " + data.getCount());
-                alertOverviewHolder.addView(textView);
-            }
-        }
-    }
-
     private void initView(ChartData chartData) {
         BarSet barSetAlarmCount = new BarSet();
         LineSet lineSetMttr = new LineSet();
@@ -211,8 +166,59 @@ public class DashboardFragment extends BaseFragment {
         lineChartView.addData(lineSetMtta);
         lineChartView.addData(lineSetMttr);
 
-        barChartView.show();
-        lineChartView.show();
+        Animation lineAnim = new Animation(500).setEasing(new LinearEase()).setAlpha(2);
+        Animation barAnim = new Animation(500).setEasing(new LinearEase()).setAlpha(2);
+
+        barChartView.show(lineAnim);
+        lineChartView.show(barAnim);
+    }
+
+    private void initView(AlertTop alertTop) {
+        if (alertTop != null && alertTop.getData() != null && alertTop.getData().size() > 0) {
+            for (AlertTop.DataEntity data : alertTop.getData()) {
+                TextView textView = new TextView(getActivity());
+                textView.setText(data.getContent() + " " + data.getCount());
+                alertOverviewHolder.addView(textView);
+            }
+        }
+    }
+
+    private void initView(AlertCompress alertCompress) {
+        if (alertCompress != null && alertCompress.getData() != null && alertCompress.getData().getDate() != null && alertCompress.getData().getDate().size() > 0) {
+            AlertCompress.DataEntity data = alertCompress.getData();
+            LineSet alertSet = new LineSet();
+            LineSet eventSet = new LineSet();
+            for (int i = 0; i < data.getDate().size(); i++) {
+                String date = data.getDate().get(i);
+                Long alert = data.getAlert().get(i);
+                Long event = data.getEvent().get(i);
+                alertSet.addPoint(date, alert);
+                eventSet.addPoint(date, event);
+            }
+
+
+            alertSet.setColor(getColor(R.color.green_500))
+                    .setThickness(10)
+                    .setDotsColor(getColor(R.color.green_700))
+                    .setFill(ColorUtils.setAlphaComponent(getColor(R.color.green_700), 127));
+
+            eventSet.setColor(getColor(R.color.blue_500))
+                    .setThickness(10)
+                    .setDotsColor(getColor(R.color.blue_700))
+                    .setFill(ColorUtils.setAlphaComponent(getColor(R.color.blue_700), 127));
+
+            alertCompressChart.addData(eventSet);
+            alertCompressChart.addData(alertSet);
+
+            alertCompressChart.setStep(5);
+            Animation anim = new Animation(500).setEasing(new LinearEase()).setAlpha(2);
+
+            alertCompressChart.show(anim);
+        }
+    }
+
+    private int getColor(int id) {
+        return ContextCompat.getColor(getActivity(), id);
     }
 
     @Override
